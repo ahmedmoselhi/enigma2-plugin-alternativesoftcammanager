@@ -63,21 +63,21 @@ class AltCamManager(Screen):
         try:
             self.stoppingTimer_conn = self.stoppingTimer.timeout.connect(
                 self.stopping)
-        except:
+        except Exception:
             self.stoppingTimer.timeout.get().append(self.stopping)
 
         self.closestopTimer = eTimer()
         try:
             self.closestopTimer_conn = self.closestopTimer.timeout.connect(
                 self.closestop)
-        except:
+        except Exception:
             self.closestopTimer.timeout.get().append(self.closestop)
 
         self.createinfo()
         self.Timer = eTimer()
         try:
             self.Timer_conn = self.Timer.timeout.connect(self.listecminfo)
-        except:
+        except Exception:
             self.Timer.callback.append(self.listecminfo)
 
         self.Timer.start(2000, False)
@@ -85,7 +85,7 @@ class AltCamManager(Screen):
     def listecminfo(self):
         try:
             self['status'].setText(open('/tmp/ecm.info', 'r').read())
-        except:
+        except Exception:
             self['status'].setText(_('No ecm info'))
 
     def createinfo(self):
@@ -224,7 +224,7 @@ class AltCamManager(Screen):
             self.cancelTimer = eTimer()
             try:
                 self.cancelTimer_conn = self.cancelTimer.timeout.get().connect(self.listecminfo)
-            except:
+            except Exception:
                 self.cancelTimer.timeout.get().append(self.setfinish)
 
             self.cancelTimer.start(4000, False)
